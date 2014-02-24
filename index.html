@@ -11,16 +11,6 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <!-- Add the OuiBounce CSS & Font -->
-    <link rel="stylesheet" href="test/ouibounce.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-
-    <!-- Load jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-    <!-- Add OuiBounce JS -->
-    <script src="build/ouibounce.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -43,20 +33,19 @@
 </h1>
 
 <h3>
-<a name="aka-ouibounce" class="anchor" href="#aka-ouibounce"><span class="octicon octicon-link"></span></a>(aka OuiBounce)</h3>
-
-<p><a href="https://travis-ci.org/carlsednaoui/bounce-exchange-alternative"><img src="https://travis-ci.org/carlsednaoui/bounce-exchange-alternative.png?branch=master" alt="tests"></a></p>
+<a name="aka-ouibounce-" class="anchor" href="#aka-ouibounce-"><span class="octicon octicon-link"></span></a>(aka OuiBounce) <a href="https://travis-ci.org/carlsednaoui/bounce-exchange-alternative"><img src="https://travis-ci.org/carlsednaoui/bounce-exchange-alternative.png?branch=master" alt="tests"></a>
+</h3>
 
 <p>A small library enabling you to display a modal before a user leaves your website. This was inspired by <a href="http://bounceexchange.com/">BounceExchange</a>.</p>
 
 <h3>
 <a name="the-philosophy-behind-this-project" class="anchor" href="#the-philosophy-behind-this-project"><span class="octicon octicon-link"></span></a>The philosophy behind this project</h3>
 
-<p>This library helps you increase your landing page conversion rates. From my experience, you can expect a lift of 7% to 15% depending on your audience, traffic type (paid or unpaid) and offer.</p>
+<p>This library helps you increase landing page conversion rates. From my experience, you can expect a lift of 7% to 15% depending on your audience, traffic type (paid or unpaid) and copy.</p>
 
-<p>Talking about offers... <strong>please</strong> use OuiBounce to <strong>provide value</strong> to your visitors. With tools like these <strong>it's very easy to create something spammy-looking</strong> that provides little value to prospective customers yet ensures a terrible experience.</p>
+<p>Talking about copy... <strong>please</strong> use OuiBounce to <strong>provide value</strong> to your visitors. With tools like these <strong>it's very easy to create something spammy-looking</strong>.</p>
 
-<p>Not sure what I mean by "provide value"? Here are a few ideas to get your creative juices flowing:</p>
+<p>Not sure what I mean by <em>provide value</em>? Here are a few ideas to get your creative juices flowing:</p>
 
 <ul>
 <li>Free ebook</li>
@@ -64,20 +53,28 @@
 <li>Exclusive access to XYZ</li>
 <li><a href="http://do.thelandingpagecourse.com/">A full educational course</a></li>
 <li><a href="https://training.kalzumeus.com/">Valuable content</a></li>
-</ul><h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+</ul><h2>
+<a name="demo--example" class="anchor" href="#demo--example"><span class="octicon octicon-link"></span></a>Demo / Example</h2>
+
+<ul>
+<li><a href="http://carlsednaoui.github.io/bounce-exchange-alternative/">Example #1</a></li>
+<li><a href="http://colors.carlsednaoui.com/">Example #2</a></li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>You can also read the docs as a <a href="http://carlsednaoui.github.io/bounce-exchange-alternative/">GitHub Page</a>.</p>
 
 <p>Download the <a href="build/ouibounce.min.js">minified</a> or <a href="build/ouibounce.js">unminified</a> script and include it on your page. OuiBounce is wrapped by a <a href="https://github.com/ForbesLindesay/umd">umd wrapper</a>, so if you are using <em>requirejs/amd</em> or <em>commonjs/browserify</em>, it will still work fine.</p>
 
 <h3>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
 
-<p>To use it simply:</p>
-
-<ul>
+<ol>
 <li>Create a hidden modal</li>
-<li>Select the modal with vanilla JavaScript (or jQuery) and call ouibounce. Here's an example:</li>
-</ul><p>Without jQuery    </p>
+<li>Select the modal with vanilla JavaScript (or jQuery) and call ouibounce</li>
+</ol><p>Here's an example:</p>
+
+<p>Without using jQuery    </p>
 
 <div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">));</span>
 </pre></div>
@@ -97,31 +94,33 @@
 <li>Aggressive mode</li>
 <li>Timer</li>
 <li>Callback</li>
-</ul><p><strong>Configuring sensitivity:</strong> Use it to define how far your mouse has to be from the window breakpoint. The higher value the more sensitive. <em>Defaults to 20.</em></p>
+</ul><p><strong>Sensitivity:</strong> Define how far the mouse has to be from the window breakpoint. The higher value, the more sensitive. <em>Defaults to 20.</em></p>
 
 <p>Example    </p>
 
 <div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">sensitivity</span><span class="o">:</span> <span class="mi">40</span> <span class="p">});</span>
 </pre></div>
 
-<p><strong>Enabling aggressive mode:</strong> By default, OuiBounce will only fire once. When OuiBounce fires a cookie is created to ensure an <em>non obtrusive</em> experience. There are cases, however, when you may want to be more aggressive (as in, you want the modal to be elegible to fire anytime the page is loaded). A perfect example is Paid landing pages.</p>
+<p><strong>Aggressive mode:</strong> By default, OuiBounce will only fire once for each visitor. When OuiBounce fires, a cookie is created to ensure a <em>non obtrusive</em> experience.</p>
+
+<p>There are cases, however, when you may want to be more aggressive (as in, you want the modal to be elegible to fire anytime the page is loaded/ reloaded). An example use-case would be on your Paid landing pages.</p>
 
 <p>Here's how to enable aggressive mode:    </p>
 
-<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">aggressive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}});</span>
+<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">aggressive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
 </pre></div>
 
 <p><strong>Set a min time before OuiBounce fires:</strong> By default, OuiBounce won't fire in the first second. You can pass a timer option like so:</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">timer</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}});</span>
+<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">timer</span><span class="o">:</span> <span class="mi">0</span> <span class="p">});</span>
 </pre></div>
 
-<p><strong>Set callback:</strong> You can also add a callback which will fire once OuiBounce has been triggered:</p>
+<p><strong>Callback:</strong> You can add a callback, which will run once OuiBounce has been triggered:</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'fired !'</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+<div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span> <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'OuiBounce fired!'</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 </pre></div>
 
-<p><strong>Multiple options:</strong> You can also combine multiple options. Here's an example</p>
+<p><strong>Multiple options:</strong> You can also combine multiple options:</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">ouiBounce</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ouibounce-modal'</span><span class="p">),</span> <span class="p">{</span>
   <span class="nx">aggressive</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -129,11 +128,6 @@
   <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ouiBounce fired!'</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 </pre></div>
-
-<h3>
-<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
-
-<p><a href="http://colors.carlsednaoui.com/">Live example</a></p>
 
 <h3>
 <a name="miscellaneous" class="anchor" href="#miscellaneous"><span class="octicon octicon-link"></span></a>Miscellaneous</h3>
@@ -152,51 +146,5 @@
     </div>
     <script src="javascripts/scale.fix.js"></script>
     
-    <!-- OuiBounce Modal -->
-    <div id="ouibounce-modal">
-      <div class="underlay"></div>
-      <div class="modal">
-        <div class="modal-title">
-          <h3>This is a OuiBounce modal!</h3>
-        </div>
-
-        <div class="modal-body">
-          <p>A doge is an elected chief of state lordship, the ruler of the Republic in many of the Italian city states during the medieval and renaissance periods, in the Italian "crowned republics".</p>
-          <p>The word is from a Venetian word that descends from the Latin dux (as do the English duke and the standard Italian duce and duca), meaning "leader", especially in a military context. The wife of a doge is styled a dogaressa. <a href="https://en.wikipedia.org/wiki/Doge" target="blank">[1]</a></p>
-
-          <form>
-            <input type="text" placeholder="you@email.com">
-            <input type="submit" value="learn more &raquo;">
-            <p class="form-notice">*this is a fake form</p>
-          </form>
-        </div>
-
-        <div class="modal-footer">
-          <p>no thanks</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Example page JS        -->
-    <!-- Used to fire the modal -->
-    <script>
-      ouiBounce(document.getElementById('ouibounce-modal'), {
-        aggressive: true,
-        timer: 0,
-        callback: function() { console.log('ouiBounce fired!'); }
-      });
-
-      $('body').on('click', function() {
-        $('#ouibounce-modal').hide();
-      });
-
-      $('#ouibounce-modal .modal-footer').on('click', function() {
-        $('#ouibounce-modal').hide();
-      });
-
-      $('#ouibounce-modal .modal').on('click', function(e) {
-        e.stopPropagation();
-      });
-    </script>
   </body>
 </html>
