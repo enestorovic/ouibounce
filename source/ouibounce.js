@@ -23,8 +23,19 @@ function ouibounce(el, config) {
 
   setTimeout(attachOuiBounce, timer);
   function attachOuiBounce() {
-    _html.addEventListener('mouseout', handleMouseout);
-    _html.addEventListener('keydown', handleKeydown);
+    // _html.addEventListener('mouseout', handleMouseout);
+    // _html.addEventListener('keydown', handleKeydown);
+
+    // polyfill for IE8
+    if (!_html.addEventListener) {
+      document.attachEvent('onmouseout', handleMouseout);
+      document.attachEvent('onkeydown', handleKeydown);
+    }
+    else {
+      _html.addEventListener('mouseout', handleMouseout);
+      _html.addEventListener('keydown', handleKeydown);
+    }
+
   }
 
   function handleMouseout(e) {
