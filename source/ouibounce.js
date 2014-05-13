@@ -1,42 +1,95 @@
-function ouiBounce(el, config) {
-  var config      = config || {},
-      aggressive  = config.aggressive || false,
-      sensitivity = setDefault(config.sensitivity, 20),
-      timer       = setDefault(config.timer, 1000),
-      callback    = config.callback || function() {};
-
-  setTimeout(attachOuiBounce.bind(el), timer);
+function ouibounce(el, config) {
+  var config     = config || {},
+    aggressive   = config.aggressive || false,
+    sensitivity  = setDefault(config.sensitivity, 20),
+    timer        = setDefault(config.timer, 1000),
+    callback     = config.callback || function() {},
+    cookieExpire = setDefaultCookieExpire(config.cookieExpire) || '',
+    sitewide     = config.sitewide === true ? ';path=/' : '',
+    _html        = document.getElementsByTagName('html')[0];
 
   function setDefault(_property, _default) {
     return typeof _property === 'undefined' ? _default : _property;
   }
 
-  function attachOuiBounce() {
-    var _this = this,
-        _html = document.getElementsByTagName('html')[0];
+  function setDefaultCookieExpire(days) {
+    // transform days to milliseconds
+    var ms = days*24*60*60*1000;
 
-    _html.addEventListener('mouseout', handleMouseout);
+    var date = new Date();
+    date.setTime(date.getTime() + ms);
 
-    function handleMouseout(e) {
-      if (e.clientY > sensitivity || (getCookieValue('viewedOuibounceModal', 'true') && !aggressive)) return;
-      _this.style.display = 'block';
-      callback();
-
-      // set cookie and disable mouseout event
-      document.cookie = 'viewedOuibounceModal=true';
-      _html.removeEventListener('mouseout', handleMouseout);
-    }
+    return "; expires=" + date.toGMTString();
   }
 
-  function getCookieValue(k, v) {
-    // return cookies in an object
+  setTimeout(attachOuiBounce, timer);
+  function attachOuiBounce() {
+    _html.addEventListener('mouseout', handleMouseout);
+    _html.addEventListener('keydown', handleKeydown);
+  }
+
+  function handleMouseout(e) {
+    if (e.clientY > sensitivity || (checkCookieValue('viewedOuibounceModal', 'true') && !aggressive)) return;
+    fire();
+    callback();
+  }
+
+  var disableKeydown = false;
+  function handleKeydown(e) {
+    if (disableKeydown || checkCookieValue('viewedOuibounceModal', 'true') && !aggressive) return;
+    else if(!e.metaKey || e.keyCode != 76) return;
+
+    disableKeydown = true;
+    fire();
+    callback();
+  }
+
+  function checkCookieValue(cookieName, value) {
+    // cookies are separated by '; '
     var cookies = document.cookie.split('; ').reduce(function(prev, curr) {
+      // split by '=' to get key, value pairs
       var el = curr.split('=');
+
+      // add the cookie to fn object
       prev[el[0]] = el[1];
 
       return prev;
     }, {});
 
-    return cookies[k] === v;
+    return cookies[cookieName] === value;
   }
+
+  function fire() {
+    // You can use ouibounce without passing an element
+    // https://github.com/carlsednaoui/ouibounce/issues/30
+    if (el) el.style.display = 'block';
+    disable();
+  }
+
+  function disable(options) {
+    var options = options || {};
+
+    // you can pass a specific cookie expiration when using the OuiBounce API
+    // ex: _ouiBounce.disable({ cookieExpire: 5 });
+    if (typeof options.cookieExpire !== 'undefined') {
+      cookieExpire = setDefaultCookieExpire(options.cookieExpire);
+    }
+
+    // you can pass use sitewide cookies too
+    // ex: _ouiBounce.disable({ cookieExpire: 5, sitewide: true });
+    if (typeof options.sitewide !== 'undefined') {
+      sitewide = ';path=/';
+    }
+
+    document.cookie = 'viewedOuibounceModal=true' + cookieExpire + sitewide;
+    
+    // remove listeners
+    _html.removeEventListener('mouseout', handleMouseout);
+    _html.removeEventListener('keydown', handleKeydown);
+  }
+
+  return {
+    fire: fire,
+    disable: disable
+  };
 }
